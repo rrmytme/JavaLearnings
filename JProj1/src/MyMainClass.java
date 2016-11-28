@@ -66,6 +66,11 @@ public class MyMainClass {
 		cs=null;
 		*/
 		
+		StringOperations so = new StringOperations();
+		so.stringOperationsExplained();
+		so = null;
+		
+		
 		
 	}
 
