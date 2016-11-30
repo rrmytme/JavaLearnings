@@ -41,7 +41,7 @@ public class StringOperations {
 		
 		//trim a string
 		System.out.printf("trimmed string is: %s\n", str1.trim());
-		
+				
 		//Compare 2 strings
 		if(str1==str2){
 		System.out.printf("Same input");
