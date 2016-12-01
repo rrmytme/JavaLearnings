@@ -72,7 +72,14 @@ public class MyMainClass {
 		so.stringOperationsExplained();
 		so = null;
 		*/
-							
+		
+		/* Program - StringAnalysisVowelsandConsonants
+		 * Class call down here
+		StringAnalysisVowelsandConsonants vc = new StringAnalysisVowelsandConsonants();
+		vc.vowelsandConsonantsAnalysis();
+		vc=null;
+		*/
+		
 	}
 
 }

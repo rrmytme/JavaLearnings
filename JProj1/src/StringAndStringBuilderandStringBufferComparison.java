@@ -7,7 +7,9 @@ public static void main(String args[])
 	for(int i=0; i<500000; i++);
 	{
 	String str1 = "Rajesh";
+	System.out.println("The Memory Address or Hashcode of this string is: " + str1.hashCode()); 
 	String str2 = str1.concat("-Kids"); 
+	System.out.println("The Memory Address or Hashcode of this string is: " + str2.hashCode()); 
 	System.out.print(str2);
 	}
 	long endTime1 = System.currentTimeMillis();
@@ -18,7 +20,9 @@ public static void main(String args[])
 	for(int i=0; i<500000; i++);
 	{
 	StringBuilder str3 =  new StringBuilder("\n\nOld string");
+	System.out.println("The Memory Address or Hashcode of this string is: " + str3.hashCode()); 
 	str3.append("-New string \n");
+	System.out.println("The Memory Address or Hashcode of this string is: " + str3.hashCode()); 
 	System.out.print(str3);
 	}
 	long endTime2 = System.currentTimeMillis();
@@ -29,7 +33,9 @@ public static void main(String args[])
 	for(int i=0; i<500000; i++);
 	{
 	StringBuffer str4 = new StringBuffer("\n\nGoodBoy");
+	System.out.println("The Memory Address or Hashcode of this string is: " + str4.hashCode()); 
 	str4.append("-Rajesh \n");
+	System.out.println("The Memory Address or Hashcode of this string is: " + str4.hashCode()); 
 	System.out.print(str4);
 	}
 	long endTime3 = System.currentTimeMillis();
