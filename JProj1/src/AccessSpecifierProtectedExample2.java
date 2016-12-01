@@ -3,6 +3,7 @@ public class AccessSpecifierProtectedExample2 {
 	protected String accountNumber="000101579552";
 	protected String accountName="514222584";
 	
+	//Public is another access specifier and any classes can access public members
 	public void accountDetails()
 	{
 		System.out.println("The Account number is: " + accountNumber + "\n" + "Account id is: " + accountName);
