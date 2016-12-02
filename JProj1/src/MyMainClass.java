@@ -80,6 +80,20 @@ public class MyMainClass {
 		vc=null;
 		*/
 		
+		/* Program - StringReverse
+		 * Class call down here
+		StringReverse srev = new StringReverse();
+		srev.reverseString();
+		srev=null;
+		*/
+		
+		/* Program - Primenumber
+		 * Class call down here
+		PrimeNumbers pn =  new PrimeNumbers();
+		pn.primeNumers();
+		pn=null;
+		*/
+		
 	}
 
 }
