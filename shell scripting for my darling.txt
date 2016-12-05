@@ -1,0 +1,590 @@
+General commands:
+
+clear - clear the logs
+who am i - gives the user, terminal and date/time details
+pwd - present working directory
+cal - displays calendar [example: cal 7 2016 or cal sep 2016]
+date - displays date [example: date:%m%y]
+time - displays time [example: time:%h%m%s]
+ctrl + d - escape after a create/updates a file using cat command
+Shift + insert - paste
+exit - escape
+q - escape after a man command
+
+------------------------------------------------------------------------------------------------------------------
+
+Files/Folders commands:
+
+touch - creates empty text files in the present working directory [example: touch filename1, .., filename n]
+mkdir - creates directory on present working directory [example: mkdir test or mkdir parent/child]
+cd - change directory from present working directory [example: cd parent/child]
+
+cat - add text inside a text file, display the contents of the file and merge multiple files to another file
+	[example1: cat > file1 //press enter and add data into the file
+	this is a text inside my file
+	 example2: cat < file1 or cat file1 //press enter, system display the file contents
+	this is a text inside my file
+	 example3: cat file1 file2 > file3
+		   cat < file3 //press enter, system display the file contents of file1 and file2 under file3
+		   this is a text inside my file1
+		   this is a text inside my file2]
+
+	example3: cat >> file1 
+	textline1
+	textline2 ..... so on  --> here we update these new data into a existing file
+
+mv - rename a file or a directory [example: mv filename1 filename2, mv dir1 dir2]
+
+rm - delete a file [ example: rm filename2]
+
+rm -r or rmdir - delete a directory [example: rm -r dir1 or rmdir dir1]
+
+cp - copy files [example: cp file1 d:/file1.1 or cp file1 d:/file1]
+
+ln - create a new file from a source file and link these files 
+	[hard link - example1: ln file1 file2 - here file1 is source file and file2 has created using ln command, whatever data 
+	created/updated will reflect in target file also. The updated data remains as it is even you delete the source file]
+	[Soft link - example2: ln -s file1 file3 - here file1 is source file and file3 has created using ln command, whatever data 
+	created/updated will reflect in target file also. you cant open this file if you delete the source file]
+
+File/folder permissioning:
+
+umask -  will give a 4 digit numeric number which tells your folder file permissions 
+	[example: 0022 - need to substract from 0666 and will get 0644, here 6 denotes your permission 
+	4 denotes your group's permission and last 4 denotes other user's permission to this folder.
+	1- Execute, 2-Write, 4-Read so 3- Execute + write, 5- Execute + Read, 6 - Write + Read]
+
+ls - list all the folders and files 
+
+ls -l - list all the folders and files in long format
+	[drwxr-xr-- folder1 23:04:22:43 --> folder
+	 -rwxrw-r-x file1   12:23:34:55 --> file
+         
+	here d - directory, r - read, w - write,x - execute. 
+		rwx - user level permission, r-x - group level permission, r-- - other user permission.
+
+ls -a - list all the folders and files including hidden files
+
+chmod - change file/folder permissions
+	[example1: chmod 777 folder1;
+		   ls -l
+		   drwxrwxrwx folder1 23:04:22:43 --> here the folder permission has changed
+	[example2: chmod 744 file1
+		   ls -l
+		   -rwxr--r-- file1   12:23:34:55 --> here the file permission has changed
+
+chmod +w or +r or +x filename/Directory --> here we give permissions to a file/directory
+
+chmod -w or -r or -x filename/Directory --> here we remove permissions from a file/directory
+
+uname - displays complete system information
+
+file * - displays all files and folder [extension of ls command]
+
+wc - give counts of lines, words, characters 
+	[example: wc file1 --> 4 30 123 file1 here 4- no.of lines, 30- no.of words, 123- no.of letters]
+
+wc -l - give counts of lines
+
+wc -w - give counts of words
+
+wc -c - give counts of characters 
+
+sort - sort the file/on screen contents [example: sort file1]
+
+cut - get a portion of file contents from a file
+	example: file1 
+		 message type-orderid-order status
+		 35=8-ord122-new
+		 35=8-ord123-filled
+		cut -d"-" -f 2,3 file1 here -d denots the delimiter, -f denotes the fields
+
+dd - converts the file contents or file type to some other type
+	example1: dd if=file1 of=file1_out conv=ucase or lcase
+	example2: dd if=file1 of=file2_out conv=ebcdic [non iso standard ASCII file type]
+
+man - manual example: man cat here....here it displays all the details about cat command
+
+banner - gives banner text example1: banner hi love you
+			   example2: banner "Bye Bye" - displays the banner in single line max 10 char
+
+compress - zip the file example: compress file1
+
+zcat - view the zip file example: zcat file1.z
+
+uncompress - unzip the file example: uncompress file1.z
+
+-------------------------------------------------------------------------------------------------------------------
+
+Shell scripting
+
+1. Hell world
+
+// this program needs to save as helloworld.sh and execute in cmd prompt as --> sh helloworld.sh
+echo "hello world" --> this prints hello world text in the screen
+
+	
+2.list all folders/file with a banner
+// this program needs to save as prog2.sh and execute in cmd prompt as --> sh prog2.sh
+// in this program we display all the files & folders in long format and ends with The End banner
+
+ls -l
+banner "The End"
+
+3. Read varaibles
+
+//in this program we print 1st line then read the input using read command, finally we print the final line that 
+contains the value of the variable my_asset usng $my_asset
+
+echo "Enter your asset value in millions:"
+read my_asset
+echo "wow you have $my_asset, its huge"
+		
+4.rename a file during runtime
+
+soln1:
+
+mv $1 $2
+cat $2
+
+//Execute this file as sh rename.sh file1 file2 it diplays the file1 contents under file2 becust we renamed it
+
+echo "enter the file name that you want to rename@
+read file_name
+mv $file_name $file2
+cat $file2
+
+//here we read the first filename as input using read command and renames the file name to file2 and display the same
+using cat command
+
+5.change permissions of a file using positional variable
+
+chmod 744 $1
+ls -l $1
+
+//here we need to enter a file name during run time and will change the file permission using chmod
+
+6.understand positional variable using set command
+
+set rajesh is a cool guy
+
+here we can read the positional variales using echo command as below,
+	echo $1 rajesh
+	echo $2 is
+	echo $3 a
+	echo $4 cool
+        echo $5 guy
+or
+	echo $* -> it will display all the positional variables in a line
+
+7.pass the file contents in a single positional parameter using Reverse quotes ['] or Accent graves
+
+set 'cat file1' 
+echo $* 
+
+//here set echo $* command displays the file1's content using position parameter [virtually]
+
+8.Read a user name of the system and add the same after a file name
+name=$1
+set 'who am i'
+mv $name $name.$1
+
+//here we need to execute this file as sh rename.sh test so this file test will be renamed to test.rajesh
+
+9.get the count of no.of files within the directory
+
+echo this is no.of files=$#
+
+//save this file as file9.sh, execute this file as sh file9.sh * 
+//output: this is no.of files=15
+
+10.Arithmatic operations using expr command [integers only]
+
+a=10 b=15
+echo 'expr $a+$b'
+echo 'expr $a-$b'
+echo 'expr $a\*$b'--> since we have special meaning of * we need use \* for multiply
+echo 'expr $a/$b'
+echo 'expr $a%$b'
+
+
+//we need save this file as expr_arithmatic.sh and execute as sh expr_arithmatic.sh
+
+11.operator prcedance 
+
+*,/,% -> 1st level
++,-   -> 2nd level
+
+a=1 b=2 c=3 d=5
+
+echo 'expr $c \* \( $a+$b \) /$d' 
+
+//here for * and (,) brackets we need to use forward slash before
+
+12.Escape sequences:
+\n - new line
+\t - tab space
+\b - back space
+\c - print from next character
+\033[1m - bold
+\033[7m - display Reverse
+\033[0m - normal letters
+
+//more details use man \ command to explore more
+
+13.Arithmatic operations using bc command [real numbers only]
+
+a=10.5 b=15.7
+
+c= 'echo $a+$b |bc'
+d= 'echo $a-$b |bc'
+e= 'echo $a\*$b | bc'--> since we have special meaning of * we need use \* for multiply
+f= 'echo $a/$b |bc'
+g= 'echo $a%$b |bc'
+
+echo $c $d $e $f $g 
+
+14.using tput command
+
+tput  clear -> clear the screen logs and $ 
+echo "Total no.of lines=\c"
+tput lines  -> gives total no.of lines in the screen
+echo "Total no.of Columns=\c"
+tput cols  -> gives total no.of colouns in the screen
+tput cup 15 20 -> place the cursor on 15th row and 20th column
+tput bold -> print the line in bold
+echo "This line will be in bold"
+
+15.using $? command
+
+$? - helps the user to understand the previous command successful or not
+
+example:
+mkdir new -> creates a new dir
+echo $? -> check whether the new dir created or not
+0 -> new dir created successfully [1 for unsuccessful]
+
+16.using if - then - fi
+
+touch new
+echo "Enter source and target file name"
+read source target
+if mv $source $target
+then
+echo "your file renamed successfully"
+fi
+
+
+17.using if - then - else - fi
+
+touch new
+echo "Enter source and target file name"
+read source target
+if mv $source $target
+then
+echo "your file renamed successfully"
+else
+echo "No such file/dir to rename"
+fi
+
+18.check number using if - then - elif - then - else - fi
+
+echo  "enter a number between 10 and 40"
+read num
+if [ $num -lt 10 ] --> lt means less than // eq - equal to, ne - not equal to, le - less than or equal to, ge - greater than or equal to
+then 
+echo "entered number too low"
+elif [ $num -gt 40 ] --> lt means greater than
+then 
+echo "entered number too high"
+else
+echo "entered number within range"
+fi
+
+19. File or Directory checks
+
+echo "enter a name:"
+read name
+if [ -f $name ] -> check whether its a file
+// [ -d $name ] -> check whether its a directory
+   [ -r or -w or -x $name ] -> check the file permissions
+   [ -s $name ] -> check the size of the file is greater than 0 or not
+
+then
+echo "some text1"
+else
+echo "some text2"
+fi
+
+20. Append data into a file if the user has write permission
+
+echo "Enter your filename here:"
+read fname
+if [ -f $filename ] 
+then
+	if [ -w $filename ]
+	then
+	echo "you can enter your text here:"
+	cat >> $filename
+	else
+	echo "you dont have permission to write"
+	fi
+fi
+
+//save this file as append.sh 
+//execute it as sh append.sh
+//enter the file name, system checks the file persmission and write data into the file if you have permission
+
+
+21. String checks
+
+str1 = "hey"
+str2 = "hi"
+str3 = ""
+
+[ "str1" = "str2" ]
+echo $?
+[ "str1" != "str2" ]
+echo $?
+[ -n "str1" ] ---> here we check its size is null
+echo $?
+[ -z "str3" ] ---> here we check its size is equal to zero
+echo $?
+
+22. -a --> and operator example
+
+echo  "enter a number between 10 and 40"
+read num
+if [ $num -le 40 -a $num -ge 10 ] --> here -le - lessorequal to, 
+				   	 -ge - greaterorequal, -a and operator
+then 
+echo "entered number within range"
+else
+echo "entered number not within range"
+fi
+
+23. Count the number of characters
+
+echo "Enter a character:\c"
+read var1
+if [ 'echo $var1 | wc -c' -eq 2] --> here we print the char then get the word count of 					that character using pipe commang and check the 					character count is equal to 2
+then
+echo "you have entered a character"
+else
+echo "invalid input"
+fi
+
+24.-o --> Or operator example
+
+echo "Enter a lowercase character:\c"
+read var1
+if [ 'echo $var1 | wc -c' -eq 2]
+then
+	if [ $var1 = a -o $var1 = e -o $var1 = i -o $var1 = o -o $var1 = u ]
+	then
+	echo "entered a vowel"
+	else
+	echo "entered not a vowel"
+	fi
+else
+echo "invalid input"
+fi
+
+25 using case command example1 - check the characters:
+
+echo "enter a character:\C"
+read var
+
+case $var in
+
+[a-z]) ---> here we use close bracket to instruct the shell that we are in case
+	echo "entered lowcase alphabets"
+;;     ---> here we use semi colons twice to instruct the shell that we out the case
+
+[0-9])
+	echo "entered numbers"
+;;
+
+[A-Z])
+	echo "entered uppercase alphabets"
+;;
+
+?)
+	echo "entered special symbol"
+;;
+
+*)
+	echo "entered more characters"
+;;
+
+esac  ---> end the case completly
+
+
+26.using case command example2 - check the words:
+
+echo "enter a word:\c"
+read word
+
+case $word in
+
+[aeiou]* | [AEIOU]*)
+	echo "word begin with vowels"
+;;
+
+[0-9]*
+	echo "word starts with numbers"
+;;
+
+*[0-9] 
+	echo "word ends with numbers"
+;;
+
+???)
+	echo "entered 3 character word"
+;;
+
+*)
+	echo "entered more characters"
+;;
+
+esac
+
+27. using While - do - done loop - print numbers 1 to 10
+
+count=1
+
+while [ $count -le 10 ]
+do
+	echo $count
+	count='expr $count + 1'
+done
+
+28. using until loop - print numbers until 10
+
+count=1
+
+until [ $count -gt 10 ]
+do
+	echo $count
+	count = 'expr $count + 1'
+done
+
+29. using for loop - print only the directory/folder names in my parent directory
+
+for item in *   --> here item is a variable, * means all
+do
+	if [ -d $item ]
+	then
+		echo $item
+	fi
+done
+
+30. using for loop - print only the file names in my parent directory
+
+for item in *   --> here item is a variable, * means all
+do
+	if [ -f $item ]
+	then
+		echo $item
+	fi
+done
+
+31. compare 2 real numbers
+
+a=4.5
+b=4.5
+[ "$a" = "$b"
+echo $?
+
+32. grep command
+
+helps to search and find a specific/set of words from a file
+
+example1: grep word1 file1 --> search a word called word1 from file1
+
+example2: grep -i word1 file1 --> -i helps to ignore case and display all the           matched words
+
+example3: grep -i -n word1 file1 --> -n helpe to find and displaye the           line number with the search word
+
+example4: grep -c word1 file1 --> diaplys the count of lines that have the                                   search word "word1"
+
+example5: grep -c -v word1 file1 -->  diaplys the count of lines that not                                       have the search word "word1"
+
+example6: grep - word1 file1 --> diaplys the lines that not have the search                                  word "word1"
+
+more details use man command for grep
+
+
+33.IFS - Internal Field Seperator
+
+line = "i*am*a*man"
+IFS=*   ---> here the IFS is *
+set $line
+echo $1
+echo $2
+echo $3
+echo $4
+
+34. passwd file explained 
+
+passwd file contains all the user account info in ETC folder on file systems
+
+cat /etc/passwd   -> execute this command to display passwd file
+
+rajesh:x:100:100:comments:/home/rajesh:/bin/bash
+
+rajesh - username
+x - encrypted password
+100: 100 - user id and group id
+comment - Comments
+/home/rajesh - home folder
+/bin/bash - default shell
+
+35. get the particular user details from passwd file in ETC folder on file system
+
+echo "enter your user name:\c"
+read uname
+line = 'grep $uname /etc/passwd'
+IFS=:
+set $line
+echo "username:$1"
+echo "Password:$2"
+echo "user id:$3"
+echo "group id:$4"
+echo "comment field:$5"
+echo "home folder:$6"
+echo "default shell:$7"
+
+
+0000 0000
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
